@@ -1,13 +1,16 @@
 'use client';
 
 import Link from 'next/link';
-import React from 'react';
+import React, { useContext } from 'react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { WorkoutContext } from '../context/WorkoutContext';
 
 const NavBar = () => {
 
     const pathname = usePathname();
+
+    const { added, saved } = useContext(WorkoutContext);
 
     const isWorkout = pathname === '/workouts';
     const isMyPlan = pathname === '/myplan';
@@ -20,7 +23,7 @@ const NavBar = () => {
                 {/* LEFT - LOGO */}
                 <div className="navbar-start">
 
-                    <div href="/" className="flex items-center gap-2">
+                    <Link href="/" className="flex items-center gap-2">
 
                         <Image
                             src="/images/logo.png"
@@ -33,7 +36,7 @@ const NavBar = () => {
                             FITLOG
                         </span>
 
-                    </div>
+                    </Link>
 
                 </div>
 
@@ -82,19 +85,22 @@ const NavBar = () => {
 
                     <ul className="flex items-center gap-6 text-white">
 
+                        {/* PLAN */}
                         <li className="flex items-center gap-2 font-semibold">
                             <span>Plan</span>
 
                             <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#DFFF00] text-black text-sm font-bold">
-                                0
+                                {added.length}
                             </span>
                         </li>
 
+
+                        {/* SAVED */}
                         <li className="flex items-center gap-2 font-semibold">
                             <span>Saved</span>
 
                             <span className="flex items-center justify-center w-6 h-6 rounded-full border border-gray-400 text-white text-sm font-bold">
-                                0
+                                {saved.length}
                             </span>
                         </li>
 

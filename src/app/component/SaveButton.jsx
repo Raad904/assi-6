@@ -9,7 +9,16 @@ const SaveButton = ({ gymdata }) => {
 
     const handelSaveButt = () => {
         console.log('trigger on', gymdata);
+        const alreadySaved = saved.some((item)=>item.id===gymdata.id)
+        
+        if(alreadySaved){
+            alert(`${gymdata.name} is alreadsaved`)
+            return;
+            
+        }
         setsaved([...saved, gymdata]);
+        alert(`${gymdata.name} is Saved`)
+        
     };
 
     return (
