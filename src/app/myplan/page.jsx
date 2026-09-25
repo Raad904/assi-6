@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useContext, useState } from 'react';
 import { WorkoutContext } from '../context/WorkoutContext';
@@ -14,20 +14,24 @@ const PlanPage = () => {
 
     const [activeTab, setActiveTab] = useState('today');
 
-    const totalExercises = exercises.length;
+    // Active tab অনুযায়ী items
+    const currentItems =
+        activeTab === 'today' ? exercises : savedExercises;
 
-    const totalMinutes = exercises.reduce(
+
+    // Active tab অনুযায়ী counter
+    const totalExercises = currentItems.length;
+
+    const totalMinutes = currentItems.reduce(
         (total, workout) => total + Number(workout.duration || 0),
         0
     );
 
-    const totalCalories = exercises.reduce(
+    const totalCalories = currentItems.reduce(
         (total, workout) => total + Number(workout.caloriesBurned || 0),
         0
     );
 
-    const currentItems =
-        activeTab === 'today' ? exercises : savedExercises;
 
     return (
         <div className="container-width">
@@ -102,35 +106,27 @@ const PlanPage = () => {
 
                 <div className="flex items-center w-fit rounded-xl border border-[#252932] bg-[#151920] p-1">
 
+                    {/* Today's Plan */}
                     <button
                         onClick={() => setActiveTab('today')}
-                        className={`
-                            px-6 py-2.5 rounded-lg text-sm
-                            transition-all duration-200
-                            cursor-pointer
-                            ${
-                                activeTab === 'today'
-                                    ? 'bg-[#202630] text-white shadow-sm'
-                                    : 'text-gray-500 hover:text-gray-300'
-                            }
-                        `}
+                        className={
+                            activeTab === 'today'
+                                ? 'px-6 py-2.5 rounded-lg text-sm transition-all duration-200 cursor-pointer bg-[#202630] text-white shadow-sm'
+                                : 'px-6 py-2.5 rounded-lg text-sm transition-all duration-200 cursor-pointer text-gray-500 hover:text-gray-300'
+                        }
                     >
                         Today's Plan
                     </button>
 
 
+                    {/* Saved */}
                     <button
                         onClick={() => setActiveTab('saved')}
-                        className={`
-                            px-6 py-2.5 rounded-lg text-sm
-                            transition-all duration-200
-                            cursor-pointer
-                            ${
-                                activeTab === 'saved'
-                                    ? 'bg-[#202630] text-white shadow-sm'
-                                    : 'text-gray-500 hover:text-gray-300'
-                            }
-                        `}
+                        className={
+                            activeTab === 'saved'
+                                ? 'px-6 py-2.5 rounded-lg text-sm transition-all duration-200 cursor-pointer bg-[#202630] text-white shadow-sm'
+                                : 'px-6 py-2.5 rounded-lg text-sm transition-all duration-200 cursor-pointer text-gray-500 hover:text-gray-300'
+                        }
                     >
                         Saved
                     </button>
@@ -156,60 +152,19 @@ const PlanPage = () => {
 
                     ) : (
 
-                        <div className="
-                            w-full
-                            min-h-[300px]
-                            rounded-2xl
-                            border
-                            border-dashed
-                            border-[#252932]
-                            bg-[#101217]
-                            flex
-                            flex-col
-                            items-center
-                            justify-center
-                            text-center
-                        ">
+                        <div className="w-full min-h-[300px] rounded-2xl border border-dashed border-[#252932] bg-[#101217] flex flex-col items-center justify-center text-center">
 
-                            <h2 className="
-                                text-white
-                                text-xl
-                                md:text-2xl
-                                font-black
-                                uppercase
-                            ">
+                            <h2 className="text-white text-xl md:text-2xl font-black uppercase">
                                 NOTHING HERE YET
                             </h2>
 
-                            <p className="
-                                text-gray-500
-                                text-sm
-                                mt-2
-                            ">
+                            <p className="text-gray-500 text-sm mt-2">
                                 Browse the library and add a lift to get today moving.
                             </p>
 
-
                             <Link
                                 href="/workouts"
-                                className="
-                                    mt-6
-                                    px-6
-                                    py-3
-                                    rounded-full
-                                    bg-[#b6ff00]
-                                    text-black
-                                    text-sm
-                                    font-bold
-                                    hover:bg-[#c4ff33]
-                                    hover:scale-105
-                                    active:scale-90
-                                    transition-all
-                                    duration-150
-                                    cursor-pointer
-                                    inline-block
-                                    shadow-[0_8px_25px_rgba(182,255,0,0.15)]
-                                "
+                                className="mt-6 px-6 py-3 rounded-full bg-[#b6ff00] text-black text-sm font-bold hover:bg-[#c4ff33] hover:scale-105 active:scale-90 transition-all duration-150 cursor-pointer inline-block shadow-[0_8px_25px_rgba(182,255,0,0.15)]"
                             >
                                 Go to workouts
                             </Link>

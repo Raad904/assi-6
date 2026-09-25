@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const Footer = () => {
     return (
-        <footer className="bg-[#0c1214] border-t border-[#273034]">
+        <footer className="bg-[#0c1214] border-t border-[#273034] shrink-0 my-4">
 
             <div className="container-width mx-auto px-4 md:px-6">
 
@@ -25,7 +25,6 @@ const Footer = () => {
                         </span>
 
                     </div>
-
 
                     {/* RIGHT - COPYRIGHT */}
                     <p className="text-xs text-[#697278]">
