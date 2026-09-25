@@ -9,7 +9,6 @@ const Footer = () => {
 
                 <div className="flex min-h-[84px] items-center justify-between">
 
-                    {/* LEFT - LOGO + NAME */}
                     <div className="flex items-center gap-2">
 
                         <Image
@@ -26,7 +25,7 @@ const Footer = () => {
 
                     </div>
 
-                    {/* RIGHT - COPYRIGHT */}
+         
                     <p className="text-xs text-[#697278]">
                         © 2026 FitLog — Workout Library. Train hard, log honest.
                     </p>

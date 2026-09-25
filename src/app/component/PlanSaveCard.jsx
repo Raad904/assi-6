@@ -1,16 +1,41 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Link from 'next/link';
+import { WorkoutContext } from '../context/WorkoutContext';
 
-const PlanSaveCard = ({ item }) => {
+const PlanSaveCard = ({ item, type }) => {
+
+    const {
+        added,
+        setadded,
+        saved,
+        setsaved
+    } = useContext(WorkoutContext);
+
     const [done, setDone] = useState(false);
+
+    const handleDelete = () => {
+
+        if (type === 'today') {
+            setadded(
+                added.filter((workout) => workout.id !== item.id)
+            );
+        }
+
+        if (type === 'saved') {
+            setsaved(
+                saved.filter((workout) => workout.id !== item.id)
+            );
+        }
+    };
 
     return (
         <div className="w-full mb-4">
+
             <div className="w-full min-h-[112px] rounded-2xl border border-[#252b35] bg-[#14171d] px-4 py-4 flex items-center gap-4">
 
-                {/* Image */}
+            
                 <div className="w-[145px] h-[80px] shrink-0 overflow-hidden rounded-xl">
                     <img
                         src={item.image}
@@ -19,7 +44,8 @@ const PlanSaveCard = ({ item }) => {
                     />
                 </div>
 
-                {/* Information */}
+
+         
                 <div className="flex-1 min-w-0">
 
                     <h2 className="text-white text-base md:text-lg font-black uppercase truncate">
@@ -30,7 +56,7 @@ const PlanSaveCard = ({ item }) => {
                         {item.category}
                     </p>
 
-                    {/* Stats */}
+
                     <div className="flex items-center gap-4 mt-2 text-gray-400 text-xs">
 
                         <span className="flex items-center gap-1">
@@ -49,12 +75,14 @@ const PlanSaveCard = ({ item }) => {
                         </span>
 
                     </div>
+
                 </div>
 
-                {/* Actions */}
+
+
                 <div className="flex items-center gap-3 shrink-0">
 
-                    {/* View Details */}
+
                     <Link
                         href={`/workouts/${item.id}`}
                         className="
@@ -72,8 +100,9 @@ const PlanSaveCard = ({ item }) => {
                         View Details
                     </Link>
 
-                    {/* Mark as Done */}
+
                     <button
+                        type="button"
                         onClick={() => setDone(true)}
                         disabled={done}
                         className={`
@@ -99,15 +128,19 @@ const PlanSaveCard = ({ item }) => {
                         </span>
                     </button>
 
-                    {/* Delete */}
+
+             
                     <button
+                        type="button"
+                        onClick={handleDelete}
                         className="
                             text-gray-500
                             text-xl
-                            hover:text-white
+                            hover:text-red-400
                             hover:scale-110
                             active:scale-90
-                            transition-all duration-150
+                            transition-all
+                            duration-150
                             cursor-pointer
                         "
                     >
@@ -117,6 +150,7 @@ const PlanSaveCard = ({ item }) => {
                 </div>
 
             </div>
+
         </div>
     );
 };

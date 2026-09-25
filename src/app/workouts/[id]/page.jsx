@@ -31,7 +31,7 @@ const DetailsPage = async ({ params }) => {
       <div className="container-width mx-auto px-4 py-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1fr]">
 
-          {/* Image */}
+     
           <div className="overflow-hidden rounded-xl">
             <img
               src={image}
@@ -40,10 +40,10 @@ const DetailsPage = async ({ params }) => {
             />
           </div>
 
-          {/* Details */}
+       
           <div className="flex flex-col">
 
-            {/* Heading */}
+         
             <div>
               <h1 className="text-3xl font-extrabold uppercase tracking-tight md:text-4xl">
                 {name}
@@ -55,7 +55,7 @@ const DetailsPage = async ({ params }) => {
                 </p>
               )}
 
-              {/* Muscle groups */}
+           
               {muscleGroups?.length > 0 && (
                 <div className="mt-4 flex flex-wrap gap-2">
                   {muscleGroups.map((muscle) => (
@@ -70,7 +70,7 @@ const DetailsPage = async ({ params }) => {
               )}
             </div>
 
-            {/* Stats */}
+           
             <div className="mt-6 overflow-hidden rounded-xl border border-[#272b34] bg-[#151820]">
               <InfoRow label="EQUIPMENT" value={equipment} />
               <InfoRow label="DIFFICULTY" value={difficulty || 'Intermediate'} />
@@ -84,7 +84,7 @@ const DetailsPage = async ({ params }) => {
               <InfoRow label="RATING" value={rating || '-'} last />
             </div>
 
-            {/* Instructions */}
+         
             <div className="mt-7">
               <h2 className="text-sm font-bold tracking-wide">INSTRUCTIONS</h2>
 
@@ -122,7 +122,7 @@ const DetailsPage = async ({ params }) => {
               )}
             </div>
 
-            {/* Buttons */}
+       
             <div className="mt-8 flex flex-wrap gap-3">
               <AddButton gymdata={gymdata}></AddButton>
 

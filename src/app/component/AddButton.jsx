@@ -11,7 +11,7 @@ const AddButton = ({ gymdata }) => {
     const handelAddButt = () => {
         console.log('trigger on', gymdata);
 
-        // Already added কিনা check
+       
         const alreadyAdded = added.some(
             (item) => item.id === gymdata.id
         );

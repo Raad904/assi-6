@@ -20,7 +20,6 @@ const NavBar = () => {
 
             <div className="navbar container-width mx-auto px-4 md:px-6">
 
-                {/* LEFT - LOGO */}
                 <div className="navbar-start">
 
                     <Link href="/" className="flex items-center gap-2">
@@ -41,12 +40,12 @@ const NavBar = () => {
                 </div>
 
 
-                {/* CENTER - NAV LINKS */}
+             
                 <div className="navbar-center hidden md:flex">
 
                     <ul className="flex items-center gap-1">
 
-                        {/* WORKOUTS */}
+                      
                         <li>
                             <Link
                                 href="/workouts"
@@ -61,7 +60,7 @@ const NavBar = () => {
                         </li>
 
 
-                        {/* MY PLAN */}
+                    
                         <li>
                             <Link
                                 href="/myplan"
@@ -80,12 +79,12 @@ const NavBar = () => {
                 </div>
 
 
-                {/* RIGHT - PLAN & SAVED */}
+       
                 <div className="navbar-end">
 
                     <ul className="flex items-center gap-6 text-white">
 
-                        {/* PLAN */}
+                  
                         <Link href="/myplan">
                         <li className="flex items-center gap-2 font-semibold">
                             <span>Plan</span>
@@ -97,7 +96,7 @@ const NavBar = () => {
                         </Link>
 
 
-                        {/* SAVED */}
+              
                          <Link href="/myplan">
                         <li className="flex items-center gap-2 font-semibold">
                             <span>Saved</span>

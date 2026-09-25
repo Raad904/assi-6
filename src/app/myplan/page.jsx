@@ -9,26 +9,47 @@ const PlanPage = () => {
 
     const { added, saved } = useContext(WorkoutContext);
 
+    const [shortby, setShortby] = useState('duration');
+    const [activeTab, setActiveTab] = useState('today');
+
     const exercises = Array.isArray(added) ? added : [];
     const savedExercises = Array.isArray(saved) ? saved : [];
 
-    const [activeTab, setActiveTab] = useState('today');
-
-    // Active tab অনুযায়ী items
+    
     const currentItems =
         activeTab === 'today' ? exercises : savedExercises;
 
 
-    // Active tab অনুযায়ী counter
+    
+    const sortedItems = [...currentItems].sort((a, b) => {
+
+        if (shortby === 'duration') {
+            return Number(b.duration || 0) - Number(a.duration || 0);
+        }
+
+        if (shortby === 'calories') {
+            return Number(b.caloriesBurned || 0) - Number(a.caloriesBurned || 0);
+        }
+
+        if (shortby === 'rating') {
+            return Number(b.rating || 0) - Number(a.rating || 0);
+        }
+
+        return 0;
+    });
+
+
     const totalExercises = currentItems.length;
 
     const totalMinutes = currentItems.reduce(
-        (total, workout) => total + Number(workout.duration || 0),
+        (total, workout) =>
+            total + Number(workout.duration || 0),
         0
     );
 
     const totalCalories = currentItems.reduce(
-        (total, workout) => total + Number(workout.caloriesBurned || 0),
+        (total, workout) =>
+            total + Number(workout.caloriesBurned || 0),
         0
     );
 
@@ -50,7 +71,7 @@ const PlanPage = () => {
             </div>
 
 
-            {/* Counter */}
+           
             <div className="w-full rounded-2xl border border-[#252932] bg-[#12151b]">
 
                 <div className="grid grid-cols-3">
@@ -69,7 +90,7 @@ const PlanPage = () => {
                     </div>
 
 
-                    {/* Minutes */}
+                 
                     <div className="px-6 py-6 border-r border-[#252932]">
 
                         <p className="text-gray-500 text-sm mb-2">
@@ -83,7 +104,6 @@ const PlanPage = () => {
                     </div>
 
 
-                    {/* Calories */}
                     <div className="px-6 py-6">
 
                         <p className="text-gray-500 text-sm mb-2">
@@ -101,12 +121,45 @@ const PlanPage = () => {
             </div>
 
 
-            {/* Tabs */}
-            <div className="mt-8">
+            <div className="w-full flex justify-end mt-4">
+
+                <fieldset className="fieldset">
+
+                    <legend className="fieldset-legend text-gray-400">
+                        Sort By
+                    </legend>
+
+                    <select
+                        value={shortby}
+                        onChange={(e) => setShortby(e.target.value)}
+                        className="select"
+                    >
+
+                        <option value="duration">
+                            Duration
+                        </option>
+
+                        <option value="calories">
+                            Calories
+                        </option>
+
+                        <option value="rating">
+                            Rating
+                        </option>
+
+                    </select>
+
+                </fieldset>
+
+            </div>
+
+
+      
+            <div className="mt-4">
 
                 <div className="flex items-center w-fit rounded-xl border border-[#252932] bg-[#151920] p-1">
 
-                    {/* Today's Plan */}
+                  
                     <button
                         onClick={() => setActiveTab('today')}
                         className={
@@ -119,7 +172,7 @@ const PlanPage = () => {
                     </button>
 
 
-                    {/* Saved */}
+                  
                     <button
                         onClick={() => setActiveTab('saved')}
                         className={
@@ -134,18 +187,21 @@ const PlanPage = () => {
                 </div>
 
 
-                {/* Content */}
+              
                 <div className="mt-6">
 
-                    {currentItems.length > 0 ? (
+                    {sortedItems.length > 0 ? (
 
                         <div className="space-y-4">
 
-                            {currentItems.map((item) => (
+                            {sortedItems.map((item) => (
+
                                 <PlanSaveCard
                                     key={item.id}
                                     item={item}
+                                    type={activeTab}
                                 />
+
                             ))}
 
                         </div>
