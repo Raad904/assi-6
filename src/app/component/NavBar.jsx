@@ -86,6 +86,7 @@ const NavBar = () => {
                     <ul className="flex items-center gap-6 text-white">
 
                         {/* PLAN */}
+                        <Link href="/myplan">
                         <li className="flex items-center gap-2 font-semibold">
                             <span>Plan</span>
 
@@ -93,9 +94,11 @@ const NavBar = () => {
                                 {added.length}
                             </span>
                         </li>
+                        </Link>
 
 
                         {/* SAVED */}
+                         <Link href="/myplan">
                         <li className="flex items-center gap-2 font-semibold">
                             <span>Saved</span>
 
@@ -103,6 +106,7 @@ const NavBar = () => {
                                 {saved.length}
                             </span>
                         </li>
+                         </Link>
 
                     </ul>
 
